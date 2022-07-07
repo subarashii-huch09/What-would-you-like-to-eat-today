@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today/issues"
   },
-  "homepage": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today"
+  "homepage": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today",
+  "devDependencies": {
+    "stylelint": "^14.9.1"
+  }
 }
