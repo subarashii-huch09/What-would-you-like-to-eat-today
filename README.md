@@ -56,6 +56,7 @@ Project Link: [https://github.com/subarashii-huch09/What-would-you-like-to-eat-t
 * [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
 * [Winwheel.js](http://dougtesting.net/winwheel/examples)
 * [Google Maps Platform APIs Documentation](https://developers.google.com/maps/documentation/javascript)
+* Novia YY Chen - Translation (Mandarin & Japanese)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
