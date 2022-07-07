@@ -22,5 +22,9 @@
   "homepage": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today",
   "devDependencies": {
     "stylelint": "^14.9.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "winwheeljs": "^2.7.0"
   }
 }
