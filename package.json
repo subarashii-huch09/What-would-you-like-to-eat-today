@@ -1,0 +1,22 @@
+{
+  "name": "what-would-you-like-to-eat-today",
+  "version": "1.0.0",
+  "description": "spin-wheel-to-deicde-food-place",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subarashii-huch09/What-would-you-like-to-eat-today.git"
+  },
+  "keywords": [
+    "[\"googleMaps",
+    "\"spinWheel"],
+  "author": "\"Ching-Wen Hu\"",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today/issues"
+  },
+  "homepage": "https://github.com/subarashii-huch09/What-would-you-like-to-eat-today"
+}
