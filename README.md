@@ -15,6 +15,7 @@ There is a Google map that will display relevant information for the winning foo
 - Javascript
 - Google Maps Platform APIs 
 - Winwheel.js
+- GSAP TweenMax.js
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -56,6 +57,7 @@ Project Link: [https://github.com/subarashii-huch09/What-would-you-like-to-eat-t
 * [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
 * [Winwheel.js](http://dougtesting.net/winwheel/examples)
 * [Google Maps Platform APIs Documentation](https://developers.google.com/maps/documentation/javascript)
+* [GSAP TweenMax.js](https://greensock.com/docs/v3/GSAP/Tween)
 * Novia YY Chen - Translation (Mandarin & Japanese)
 
 
