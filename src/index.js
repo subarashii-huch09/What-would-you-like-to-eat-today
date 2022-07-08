@@ -165,7 +165,7 @@ let directionRender;
 let infoWindow;
 
 function initMap() {
-  // create a map 
+  // create a map
   map = new google.maps.Map(document.querySelector(".map"), {
     // the center of map  剛開始地圖的中心點
     center: { lat: -36.848461, lng: 174.763336 },
@@ -173,7 +173,11 @@ function initMap() {
     // initial zoom ratio 剛開始地圖的縮放大小
     // 1-20，數字愈大，地圖愈細：1是世界地圖，20就會到街道
     zoom: 7,
+
+    // hybrid 顯示正常和衛星視圖的混合。
     mapTypeId: "hybrid",
+
+    // 日間/夜間地圖
     styles: [
       { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
       { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -256,97 +260,103 @@ function initMap() {
     ],
   });
 
-  navigator.geolocation.getCurrentPosition(function (position) {
-    currentPosition = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-    };
-
-    map.setCenter(currentPosition);
-    map.setZoom(14);
-
-    const autocomplete = new google.maps.places.Autocomplete(
-      document.querySelector(".input"),
-      {
-        types: ["restaurant", "bakery", "cafe"],
-        bounds: {
-          east: currentPosition.lng + 0.001,
-          west: currentPosition.lng - 0.001,
-          south: currentPosition.lat - 0.001,
-          north: currentPosition.lat + 0.001,
-        },
-        strictBounds: false,
-      }
-    );
-
-    autocomplete.addListener("place_changed", function () {
-      const place = autocomplete.getPlace();
-
-      selectedPlace = {
-        location: place.geometry.location,
-        placeId: place.place_id,
-        name: place.name,
-        address: place.formatted_address,
-        phoneNumber: place.formatted_phone_number,
-        rating: place.rating,
+  // 先確認使用者裝置能不能抓地點
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      currentPosition = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       };
 
-      map.setCenter(selectedPlace.location);
+      map.setCenter(currentPosition);
+      map.setZoom(14);
 
-      if (!marker) {
-        marker = new google.maps.Marker({
-          map: map,
-        });
-      }
-
-      marker.setPosition(selectedPlace.location);
-
-      if (!directonService) {
-        directonService = new google.maps.DirectionsService({
-          map: map,
-        });
-      }
-
-      if (!directionRender) {
-        directionRender = new google.maps.DirectionsRenderer({
-          map: map,
-        });
-      }
-
-      directionRender.set("directions", null);
-
-      directonService.route(
+      const autocomplete = new google.maps.places.Autocomplete(
+        document.querySelector(".input"),
         {
-          origin: new google.maps.LatLng(
-            currentPosition.lat,
-            currentPosition.lng
-          ),
-          destination: {
-            placeId: selectedPlace.placeId,
+          types: ["restaurant", "bakery", "cafe"],
+          bounds: {
+            east: currentPosition.lng + 0.001,
+            west: currentPosition.lng - 0.001,
+            south: currentPosition.lat - 0.001,
+            north: currentPosition.lat + 0.001,
           },
-          travelMode: "WALKING",
-        },
-        function (response, status) {
-          if (status === "OK") {
-            directionRender.setDirections(response);
+          strictBounds: false,
+        }
+      );
 
-            if (!infoWindow) {
-              infoWindow = new google.maps.InfoWindow();
-            }
-            infoWindow.setContent(
-              `
+      autocomplete.addListener("place_changed", function () {
+        const place = autocomplete.getPlace();
+
+        selectedPlace = {
+          location: place.geometry.location,
+          placeId: place.place_id,
+          name: place.name,
+          address: place.formatted_address,
+          phoneNumber: place.formatted_phone_number,
+          rating: place.rating,
+        };
+
+        map.setCenter(selectedPlace.location);
+
+        if (!marker) {
+          marker = new google.maps.Marker({
+            map: map,
+          });
+        }
+
+        marker.setPosition(selectedPlace.location);
+
+        if (!directonService) {
+          directonService = new google.maps.DirectionsService({
+            map: map,
+          });
+        }
+
+        if (!directionRender) {
+          directionRender = new google.maps.DirectionsRenderer({
+            map: map,
+          });
+        }
+
+        directionRender.set("directions", null);
+
+        directonService.route(
+          {
+            origin: new google.maps.LatLng(
+              currentPosition.lat,
+              currentPosition.lng
+            ),
+            destination: {
+              placeId: selectedPlace.placeId,
+            },
+            travelMode: "WALKING",
+          },
+          function (response, status) {
+            if (status === "OK") {
+              directionRender.setDirections(response);
+
+              if (!infoWindow) {
+                infoWindow = new google.maps.InfoWindow();
+              }
+              infoWindow.setContent(
+                `
             <h3>${selectedPlace.name}</h3>
             <p><span> 🛖 Address: </span>${selectedPlace.address}</p>
             <p><span> ☎️ Phone Number : </span><a href="tel:${selectedPlace.phoneNumber}"> ${selectedPlace.phoneNumber}</a></p>
             <p><span> ⭐️ Rating: </span>${selectedPlace.rating}</p>
             <p><span>⏱ Walking Time: </span>${response.routes[0].legs[0].duration.text}</p>`
-            );
-            infoWindow.open(map, marker);
+              );
+              infoWindow.open(map, marker);
+            }
           }
-        }
-      );
+        );
+      });
     });
-  });
+  } else {
+    alert("Your device does not support geolocation feature");
+  }
+ 
 }
 
 const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
