@@ -1,6 +1,6 @@
 # What'd you like to eat today?
-![Demo-2](./images/demo-2.png)
-![Demo-1](./images/demo-1.png)
+![Demo-2](./src/images/demo-2.png)
+![Demo-1](./src/images/demo-1.png)
 
 <br>
 A responsive website that helps users to decide what to have for lunch or dinner.
@@ -44,7 +44,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Chingwen Hu - cwhu823@icloud.com
 
-Project Link: [ https://subarashii-huch09.github.io/What-would-you-like-to-eat-today](https://subarashii-huch09.github.io/What-would-you-like-to-eat-today)
+<!-- Project Link: [ https://subarashii-huch09.github.io/What-would-you-like-to-eat-today](https://subarashii-huch09.github.io/What-would-you-like-to-eat-today) -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
