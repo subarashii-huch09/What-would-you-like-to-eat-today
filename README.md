@@ -44,7 +44,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Chingwen Hu - cwhu823@icloud.com
 
-Project Link: [https://github.com/subarashii-huch09/What-would-you-like-to-eat-today](https://github.com/subarashii-huch09/What-would-you-like-to-eat-today)
+Project Link: [ https://subarashii-huch09.github.io/What-would-you-like-to-eat-today](https://subarashii-huch09.github.io/What-would-you-like-to-eat-today)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
