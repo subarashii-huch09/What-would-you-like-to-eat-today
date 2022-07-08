@@ -421,6 +421,7 @@ const wheel = new Winwheel({
       textFontSize: "12",
     };
   }),
+  responsive: true,
   pins: true,
   animation: {
     type: "spinToStop",
@@ -435,15 +436,13 @@ const wheel = new Winwheel({
       //呼叫wheel 讓它重新畫一次輪盤
       wheel.draw();
 
-
       window.alert(segment.text);
       //
       //從localStorage找到選項資料，然後透過find從列表裡找出來
       const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
-      selectedPlace = placeList.find((place)=> {
+      selectedPlace = placeList.find((place) => {
         return place.name === segment.text;
       });
-
 
       // 以下就跟找到選取項目並標示出路線及資訊的方式一樣
       map.setCenter(selectedPlace.location);
