@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Wheel, Bootstrap, Google Maps API" />
+    <meta
+      name="description"
+      content="A website that helps you deicde where to have meals by spinning the wheel"
+    />
+    <meta name="author" content="Ching-Wen Hu" />
+
+    <link rel="shortcut icon" href="/images/favicon-32x32.png" />
+
+    <meta
+      property="og:title"
+      content="What'd you like to eat today? 今天想吃什麼？"
+    />
+    <meta
+      property="og:description"
+      content="A place that helps you deicde where to have meals by spinning the wheel"
+    />
+    <meta property="og:type" content="website" />
+    <!-- <meta
+      property="og:url"
+      content=" https://subarashii-huch09.github.io/What-would-you-like-to-eat-today"
+    /> -->
+    <meta property="og:image" content="/images/favicon-32x32.png" />
+
+    <meta
+      name="twitter:title"
+      content="What'd you like to eat today? 今天想吃什麼？ "
+    />
+    <meta
+      name="twitter:description"
+      content="A place that helps you deicde where to have meals by spinning the wheel."
+    />
+    <meta name="twitter:image" content="/images/favicon-32x32.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    /> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/src/index.css" />
+    <title>What'd you like to eat today? 今天想吃什麼？</title>
+  </head>
+
+  <body class="bg-dark">
+    <main class="container-fluid wrapper bg-dark">
+      <header>
+        <h1 class="title pt-3 pb-1 text-center text-warning fw-bold">
+          What'd you like to eat today?
+        </h1>
+      </header>
+      <div class="container-fluid container py-4">
+        <div class="pt-2">
+          <div class="languages pb-5">
+            <a
+              href="#"
+              language="english"
+              class="link active text-decoration-none text-warning border rounded-pill p-3"
+              >English</a
+            >
+            <a
+              href="#"
+              language="mandarin"
+              class="link text-decoration-none text-warning mx-2 border rounded-pill p-3"
+              >中文</a
+            >
+            <a
+              href="#"
+              language="japanese"
+              class="link text-decoration-none text-warning border rounded-pill p-3"
+              >日本語</a
+            >
+          </div>
+          <div class="instruction text-white pt-2">
+            <p>
+              Can’t decide what’s for lunch or dinner? You've come to the right
+              place!
+            </p>
+            <p>
+              For better user experience, allow the site to use your current
+              location.
+            </p>
+            <p>
+              Once the map is loaded with your current location, enter your
+              favourite food place
+            </p>
+            <p>
+              Select the place from the drop-down menu then click the green
+              button below
+            </p>
+            <p>
+              After the button is clicked, the food place will be added under My
+              Favourites
+            </p>
+            <p>
+              Click Spin the Wheel. Feel free to add more places before spinning
+              the wheel :D
+            </p>
+            <p>
+              A pop-up will announce the winning place. The map above will
+              display relevant information for that place !
+            </p>
+          </div>
+        </div>
+
+        <div class="map" style="height: 60vh"></div>
+      </div>
+      <div class="p-4 input-display-style">
+        <div class="user-input">
+          <input class="input form-control" type="text" />
+          <button class="add-fav mx-auto d-block btn btn-success add pb-2 my-4">
+            Add to My Favourites ❤️
+          </button>
+        </div>
+        <div class="fav-list">
+          <h2 class="my-fav text-warning text-center mt-5 fs-4">
+            My Favourites
+          </h2>
+          <ul
+            class="list-group list-group-flush list-group-numbered foodPlace_list py-3"
+          ></ul>
+        </div>
+      </div>
+
+      <button
+        class="spin mx-auto d-block btn btn-primary my-4 draw text-white py-3"
+      >
+        Spin the Wheel
+      </button>
+      <div
+        class="wheel"
+        style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.3);
+          display: none;
+        "
+      >
+        <canvas
+          id="canvas"
+          width="350"
+          height="350"
+          style="
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          "
+        ></canvas>
+      </div>
+
+      <footer class="footer mt-5 pt-5">
+        <p class="text-warning text-center pt-5">
+          An open source project by <br class="break-line" />Ching-Wen Hu
+          <a
+            href="https://github.com/subarashii-huch09/What-would-you-like-to-eat-today"
+            target="_blank"
+            ><img
+              class="github-icon mb-1 ms-2 bg-warning border rounded-pill"
+              src="/images/github_icon.png"
+              alt="github-icon"
+          /></a>
+        </p>
+      </footer>
+    </main>
+
+    <script src="./node_modules/winwheeljs/dist/Winwheel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script id="google"
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG3-yC4hODHxY6M-8KkvoUXx_d8NXYMDA&libraries=places&callback=initMap"
+    ></script>
+    <script src="/src/index.js"></script>
+  </body>
+</html>
