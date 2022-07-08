@@ -427,16 +427,25 @@ const wheel = new Winwheel({
     spins: 16,
     easing: "Power4.easeInOut",
     callbackFinished: function (segment) {
+      //抽到之後，把視窗關起來
       document.querySelector(".wheel").style.display = "none";
+      // 重新設置輪盤
       wheel.rotationAngle = 0;
+
+      //呼叫wheel 讓它重新畫一次輪盤
       wheel.draw();
+
+
       window.alert(segment.text);
-      const placeList =
-        JSON.parse(localStorage.getItem("placeList")) || [];
+      //
+      //從localStorage找到選項資料，然後透過find從列表裡找出來
+      const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
       selectedPlace = placeList.find((place)=> {
         return place.name === segment.text;
       });
 
+
+      // 以下就跟找到選取項目並標示出路線及資訊的方式一樣
       map.setCenter(selectedPlace.location);
 
       if (!marker) {
@@ -514,9 +523,9 @@ document.querySelector(".add").addEventListener("click", () => {
   localStorage.setItem("placeList", JSON.stringify(placeList));
 
 
-  const color = [placeList.length % 4];
+  const colour = colours[placeList.length % 4];
   wheel.addSegment({
-    fillStyle: color,
+    fillStyle: colour,
     text: selectedPlace.name,
     strokeStyle: "white",
   });
@@ -542,6 +551,7 @@ document.querySelector(".foodPlace_list").addEventListener("click", (e) => {
       });
 
       wheel.deleteSegment(index + 1);
+      wheel.draw()
 
       // 篩選，如果點到的名稱，跟loop裡面的一樣，就return false，就可以刪除
       const newPlaceList = placeList.filter((place) => {
