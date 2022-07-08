@@ -262,32 +262,49 @@ function initMap() {
 
   // 先確認使用者裝置能不能抓地點
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
+    // get current position
+    navigator.geolocation.getCurrentPosition((position)=> {
       currentPosition = {
+        // coords = coordiantes
+        // https://developers.google.com/maps/documentation/javascript/geolocation
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
 
+      //設定目前位置為中心點，並顯示在網頁上
       map.setCenter(currentPosition);
       map.setZoom(14);
 
-      const autocomplete = new google.maps.places.Autocomplete(
+      // 選取輸入匡
+      // Autocomplete 會有兩個參數：輸入匡 ＆ 物件（可以針對搜尋的工作最設定）
+      // https://developers.google.com/maps/documentation/javascript/places-autocomplete?hl=en#javascript
+      const searchInput = new google.maps.places.Autocomplete(
         document.querySelector(".input"),
         {
+          //設定景點種類
           types: ["restaurant", "bakery", "cafe"],
+
+          // 以目前位置來設定搜尋的邊界
+          // Create a bounding box with sides ~10km away from the center point
+          //
           bounds: {
-            east: currentPosition.lng + 0.001,
-            west: currentPosition.lng - 0.001,
-            south: currentPosition.lat - 0.001,
-            north: currentPosition.lat + 0.001,
+            east: currentPosition.lng + 0.1,
+            west: currentPosition.lng - 0.1,
+            south: currentPosition.lat - 0.1,
+            north: currentPosition.lat + 0.1,
           },
+
+          // 雖然搜尋是以上面的邊界設定為優先，但是我們還是不要太過限制，還是希望搜尋範圍不要只有限定在上面設定邊界
           strictBounds: false,
         }
       );
 
-      autocomplete.addListener("place_changed", function () {
-        const place = autocomplete.getPlace();
+      // // Listen for the event fired when the user selects a prediction and retrieve more details for that place.
+      // 我們在這綁定監聽器，當點選某個選項時，就會呼救裡面的函式，裡面函式的功能是取得選取的地方訊息
+      searchInput.addListener("place_changed", () => {
+        const place = searchInput.getPlace();
 
+        // console.log(place)
         selectedPlace = {
           location: place.geometry.location,
           placeId: place.place_id,
@@ -297,48 +314,66 @@ function initMap() {
           rating: place.rating,
         };
 
+        //設定地圖中心就會更新到選取的地放的位置
         map.setCenter(selectedPlace.location);
 
+        // marker一開始沒有值，所以我們就會進入判斷式，裡面製造一個marker
+        // https://developers.google.com/maps/documentation/javascript/adding-a-google-map?hl=en
         if (!marker) {
           marker = new google.maps.Marker({
             map: map,
           });
         }
-
+        // 指定marker位置為選取的地點位置
         marker.setPosition(selectedPlace.location);
 
+        // https://developers.google.com/maps/documentation/javascript/directions?hl=en
+
+        // 取得步行路線資訊
+        //當directionService裡面是空的時候，我們會建立一個新的
         if (!directonService) {
           directonService = new google.maps.DirectionsService({
             map: map,
           });
         }
 
+        // 畫出路線
+        //當directionRender裡面是空的時候，我們會建立一個新的
         if (!directionRender) {
           directionRender = new google.maps.DirectionsRenderer({
             map: map,
           });
         }
 
+        // 先確定directionRender是空的，所以先呼叫set來清空
         directionRender.set("directions", null);
 
+        // 呼叫route 去取得路線資訊, route裡面有兩個參數
         directonService.route(
           {
+            //起點：建立一個經度緯度的地圖物件
             origin: new google.maps.LatLng(
               currentPosition.lat,
               currentPosition.lng
             ),
+
+            //終點
             destination: {
               placeId: selectedPlace.placeId,
             },
+            //指定旅途方式
             travelMode: "WALKING",
           },
           function (response, status) {
             if (status === "OK") {
               directionRender.setDirections(response);
 
+              //在marker上面加上一個框框，顯示資訊
+              // https://developers.google.com/maps/documentation/javascript/infowindows?hl=en
               if (!infoWindow) {
                 infoWindow = new google.maps.InfoWindow();
               }
+
               infoWindow.setContent(
                 `
             <h3>${selectedPlace.name}</h3>
@@ -347,6 +382,8 @@ function initMap() {
             <p><span> ⭐️ Rating: </span>${selectedPlace.rating}</p>
             <p><span>⏱ Walking Time: </span>${response.routes[0].legs[0].duration.text}</p>`
               );
+
+              // 打開infowindow
               infoWindow.open(map, marker);
             }
           }
@@ -358,8 +395,9 @@ function initMap() {
   }
  
 }
-
+// 這裡做初始化的設定，就是一開始從localStorage取得資料
 const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
+// 然後使用forEach來loop過每個選項，並顯示出在我的最愛清單上
 placeList.forEach((place) => {
   document.querySelector(".foodPlace_list").innerHTML += `
     <li class="list-group-item">${place.name} 
@@ -395,7 +433,7 @@ const wheel = new Winwheel({
       window.alert(segment.text);
       const placeList =
         JSON.parse(localStorage.getItem("placeList")) || [];
-      selectedPlace = placeList.find(function (place) {
+      selectedPlace = placeList.find((place)=> {
         return place.name === segment.text;
       });
 
@@ -454,13 +492,27 @@ const wheel = new Winwheel({
   },
 });
 
-document.querySelector(".add").addEventListener("click", function () {
+// 當增加的按鈕按下，就會清單內容就會增加
+// 我們同時希望有刪除的功能，所以加上button
+document.querySelector(".add").addEventListener("click", () => {
   document.querySelector(".foodPlace_list").innerHTML += `
     <li class="list-group-item">${selectedPlace.name} 
     <button class="btn-close float-end remove"></button>
     </li>`;
-  const placeList =
-    JSON.parse(localStorage.getItem("placeList")) || [];
+
+  //每次按下新增的時候， 我們從localStorage取得存在瀏覽器的選項列表
+  // getItem 要傳一個字串，就是我們傳到瀏覽器資料的名稱
+  // 取出來後，資料是字串，所以用JSON.parse，把資料轉為javascript陣列
+  // 如果取出來是空值，我們就設置一個新的空的陣列
+  const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
+
+  // 把選到的選項放進陣列裡
+  placeList.push(selectedPlace);
+
+  // 放進陣列後，我們再重新把他放到localStorage裡面
+  // 存進去前，記得把資料轉換成字串
+  localStorage.setItem("placeList", JSON.stringify(placeList));
+
 
   const color = [placeList.length % 4];
   wheel.addSegment({
@@ -469,19 +521,21 @@ document.querySelector(".add").addEventListener("click", function () {
     strokeStyle: "white",
   });
   wheel.draw();
-  placeList.push(selectedPlace);
-  localStorage.setItem("placeList", JSON.stringify(placeList));
+  
+  // 當選項加入清單後，清除輸入匡內容，這樣就不用手動刪除
   document.querySelector(".input").value = "";
 });
 
-document
-  .querySelector(".foodPlace_list")
-  .addEventListener("click", function (e) {
+
+document.querySelector(".foodPlace_list").addEventListener("click", (e) => {
     if (e.target.classList.contains("remove")) {
       e.target.parentNode.remove();
+      // 判斷裡面的物件target, 如果classList有remove的元素，我們會往回找，找出它的父元素，做出刪除的動作
+
+      // 取得想要刪除選項的名稱
       const placeName = e.target.parentNode.innerText.trim();
-      const placeList =
-        JSON.parse(localStorage.getItem("placeList")) || [];
+      //刪除前，會先到localStorage取得所有在清單上的選項
+      const placeList = JSON.parse(localStorage.getItem("placeList")) || [];
 
       const index = placeList.findIndex((place) => {
         return place.name === placeName;
@@ -489,15 +543,20 @@ document
 
       wheel.deleteSegment(index + 1);
 
+      // 篩選，如果點到的名稱，跟loop裡面的一樣，就return false，就可以刪除
       const newPlaceList = placeList.filter((place) => {
         if (place.name === placeName) return false;
         return true;
+        // return true 就會篩選出我們要的，並存放在新的陣列裡newPlaceList
       });
+      // 最後把篩選過後的清單，存放回去
       localStorage.setItem("placeList", JSON.stringify(newPlaceList));
     }
   });
 
-document.querySelector(".draw").addEventListener("click", function () {
+
+ // click spin the wheel 
+document.querySelector(".draw").addEventListener("click", ()=> {
   document.querySelector(".wheel").style.display = "block";
   wheel.startAnimation();
 });
