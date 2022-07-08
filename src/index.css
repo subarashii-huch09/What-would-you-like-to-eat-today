@@ -51,3 +51,110 @@
   cursor: pointer;
 }
 
+@media only screen and (min-width: 36rem ) {
+ .container {
+   display: grid;
+   grid-template-columns: 1.5fr 2fr;
+   grid-column:1.5rem;
+ }
+
+ .container .map {
+  min-height: 100%;
+  }  
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .break-line{
+    display: none;
+  }
+  .instruction {
+    padding: 0.75rem 1.125rem 0 0;
+  }
+  .instruction p {
+    padding-right: 1rem;
+    font-size: 1.25rem;
+    line-height: 1.75;
+  }
+
+  .input-display-style{
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    justify-content: space-between;
+    grid: 2rem;
+    margin-bottom: 5.5rem;
+    /* outline:1px solid red; */
+  }
+
+  .user-input { 
+    min-width: 66%;
+    padding: 0;
+    margin: 0 auto;
+    /* outline:1px solid red;
+     */
+  
+  }
+
+  .user-input > .input {
+    height: 3.5rem;
+    text-align: center;
+  }
+
+  .fav-list {
+    padding-right: 5rem;
+  }
+  .fav-list h2{
+    margin-top: 0 !important;
+    padding: 1rem 0;
+  }
+
+  .fav-list ul {
+    max-width: 75%;
+    margin: 0 auto;
+    /* outline:1px solid red; */
+  }
+}
+
+@media only screen and (min-width: 65rem ){
+
+  .title{
+    font-size: 4.25rem;
+  }
+
+  .input-display-style{
+    min-width: 90%;
+    margin: 0 auto;
+  }
+
+}
+
+@media only screen and (min-width: 90rem ){
+  .title {
+    font-size: 5.75rem;
+  }
+
+  .instruction p{
+    font-size: 1.5rem;
+  }
+
+  .input-display-style{
+    min-width: 52%;
+  }
+  
+  
+  .add-fav , .foodPlace_list , .spin{
+    font-size: 1.25rem;
+    padding: 1.5rem !important
+  }
+
+  .footer{
+    font-size: 1.25rem;
+  }
+
+  .github-icon {
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+
+}
