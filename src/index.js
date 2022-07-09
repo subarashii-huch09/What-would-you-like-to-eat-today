@@ -443,7 +443,7 @@ const wheel = new Winwheel({
 
       //呼叫wheel 讓它重新畫一次輪盤
       wheel.draw();
-      let segment = wheel.getIndicatedSegment();
+
       window.alert(segment.text);
       //
       //從localStorage找到選項資料，然後透過find從列表裡找出來
@@ -519,11 +519,10 @@ function drawTriangle() {
   ctx.fillStyle = "orange"; // Set fill colour.
   ctx.lineWidth = 2;
   ctx.beginPath(); // Begin path.
-  ctx.moveTo(170, 5); // Move to initial position.
-  ctx.lineTo(230, 5); // Draw lines to make the shape.
-  ctx.lineTo(200, 40);
-  ctx.lineTo(171, 5);
-  ctx.stroke(); // Complete the path by stroking (draw lines).
+  ctx.moveTo(75, 50);
+  ctx.lineTo(100, 75);
+  ctx.lineTo(100, 25);
+  // ctx.stroke(); // Complete the path by stroking (draw lines).
   ctx.fill(); // Then fill.
 }
 
