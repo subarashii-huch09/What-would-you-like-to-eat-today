@@ -412,7 +412,6 @@ placeList.forEach((place) => {
 //
 const colours = ["#eae56f", "#89f26e", "#7de6ef", "#e7706f"];
 const wheel = new Winwheel({
-  canvasId: "handWheel",
   numSegments: placeList.length,
   segments: placeList.map((place, index) => {
     return {
@@ -502,27 +501,23 @@ const wheel = new Winwheel({
   },
 });
 
-// Create image in memory.
-let handImage = new Image();
-// Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
-handImage.onload = function()
-{
-    let handCanvas = document.getElementById('handWheel');
-    let ctx = handCanvas.getContext('2d');
- 
-    if (ctx) {
-        ctx.save();
-        ctx.translate(200, 150);
-        ctx.rotate(handWheel.degToRad(-40));  // Here I just rotate the image a bit.
-        ctx.translate(-200, -150);
-        ctx.drawImage(handImage, 255, 110);   // Draw the image at the specified x and y.
-        ctx.restore();
-    }
-};
- 
-// Set source of the image. Once loaded the onload callback above will be triggered.
-handImage.src = '/hand_point_left.png';
+drawTriangle();
 
+function drawTriangle() {
+  // Get the canvas context the wheel uses.
+  let ctx = wheel.ctx;
+
+  ctx.strokeStyle = "navy"; // Set line colour.
+  ctx.fillStyle = "orange"; // Set fill colour.
+  ctx.lineWidth = 2;
+  ctx.beginPath(); // Begin path.
+  ctx.moveTo(150, -10); // Move to initial position.
+  ctx.lineTo(220, 0); // Draw lines to make the shape.
+  ctx.lineTo(188, 25);
+  ctx.lineTo(151, -10);
+  ctx.stroke(); // Complete the path by stroking (draw lines).
+  ctx.fill(); // Then fill.
+}
 
 let audio = new Audio('/tick.mp3');  // Create audio object and load desired file.
  
