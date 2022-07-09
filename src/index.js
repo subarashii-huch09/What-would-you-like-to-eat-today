@@ -413,7 +413,6 @@ placeList.forEach((place) => {
 const colours = ["#eae56f", "#89f26e", "#7de6ef", "#e7706f"];
 const wheel = new Winwheel({
   numSegments: placeList.length,
-  pointerAngle: 45,
   segments: placeList.map((place, index) => {
     return {
       fillStyle: colours[index % 4],
@@ -422,12 +421,6 @@ const wheel = new Winwheel({
       textFontSize: "12",
     };
   }),
-  pointerGuide :        // Turn pointer guide on.
-        {
-            'display'     : true,
-            'strokeStyle' : 'red',
-            'lineWidth'   : 3
-        },
   responsive: true,
   pins: true,
   animation: {
@@ -519,10 +512,10 @@ function drawTriangle() {
   ctx.fillStyle = "orange"; // Set fill colour.
   ctx.lineWidth = 2;
   ctx.beginPath(); // Begin path.
-  ctx.moveTo(170, 5); // Move to initial position.
-  ctx.lineTo(230, 5); // Draw lines to make the shape.
-  ctx.lineTo(200, 40);
-  ctx.lineTo(171, 5);
+  ctx.moveTo(100, 0); // Move to initial position.
+  ctx.lineTo(230, 0); // Draw lines to make the shape.
+  ctx.lineTo(200, 20);
+  ctx.lineTo(101, 0);
   ctx.stroke(); // Complete the path by stroking (draw lines).
   ctx.fill(); // Then fill.
 }
