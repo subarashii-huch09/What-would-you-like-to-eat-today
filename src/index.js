@@ -421,6 +421,7 @@ const wheel = new Winwheel({
       textFontSize: "12",
     };
   }),
+  callbackAfter: drawColourTriangle(),
   responsive: true,
   pins: true,
   animation: {
