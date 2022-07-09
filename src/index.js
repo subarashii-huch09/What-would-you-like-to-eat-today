@@ -512,10 +512,10 @@ function drawTriangle() {
   ctx.fillStyle = "orange"; // Set fill colour.
   ctx.lineWidth = 2;
   ctx.beginPath(); // Begin path.
-  ctx.moveTo(150, 0); // Move to initial position.
+  ctx.moveTo(150, -10); // Move to initial position.
   ctx.lineTo(220, 0); // Draw lines to make the shape.
-  ctx.lineTo(190, 25);
-  ctx.lineTo(151, 0);
+  ctx.lineTo(180, 25);
+  ctx.lineTo(151, -10);
   ctx.stroke(); // Complete the path by stroking (draw lines).
   ctx.fill(); // Then fill.
 }
