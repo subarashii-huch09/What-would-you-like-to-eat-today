@@ -498,8 +498,27 @@ const wheel = new Winwheel({
         }
       );
     },
+    callbackAfter: "drawTriangle()",
   },
 });
+
+drawTriangle();
+
+function drawTriangle() {
+  // Get the canvas context the wheel uses.
+  let ctx = wheel.ctx;
+
+  ctx.strokeStyle = "navy"; // Set line colour.
+  ctx.fillStyle = "aqua"; // Set fill colour.
+  ctx.lineWidth = 2;
+  ctx.beginPath(); // Begin path.
+  ctx.moveTo(170, 5); // Move to initial position.
+  ctx.lineTo(230, 5); // Draw lines to make the shape.
+  ctx.lineTo(200, 40);
+  ctx.lineTo(171, 5);
+  ctx.stroke(); // Complete the path by stroking (draw lines).
+  ctx.fill(); // Then fill.
+}
 
 let audio = new Audio('/tick.mp3');  // Create audio object and load desired file.
  
