@@ -443,7 +443,7 @@ const wheel = new Winwheel({
 
       //呼叫wheel 讓它重新畫一次輪盤
       wheel.draw();
-
+      let segment = wheel.getIndicatedSegment();
       window.alert(segment.text);
       //
       //從localStorage找到選項資料，然後透過find從列表裡找出來
