@@ -425,8 +425,9 @@ const wheel = new Winwheel({
   pins: true,
   animation: {
     type: "spinToStop",
-    spins: 16,
+    spins: 12,
     easing: "Power4.easeInOut",
+    callbackSound: playSound,
     callbackFinished: function (segment) {
       //抽到之後，把視窗關起來
       document.querySelector(".wheel").style.display = "none";
@@ -499,6 +500,16 @@ const wheel = new Winwheel({
     },
   },
 });
+
+let audio = new Audio('/tick.mp3');  // Create audio object and load desired file.
+ 
+function playSound(){
+        // Stop and rewind the sound (stops it if already playing).
+        audio.pause(),
+        audio.currentTime = 0,
+ 
+        // Play the sound.
+        audio.play()}
 
 // 當增加的按鈕按下，就會清單內容就會增加
 // 我們同時希望有刪除的功能，所以加上button
