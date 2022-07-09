@@ -513,8 +513,8 @@ function drawTriangle() {
   ctx.lineWidth = 2;
   ctx.beginPath(); // Begin path.
   ctx.moveTo(150, 0); // Move to initial position.
-  ctx.lineTo(230, 0); // Draw lines to make the shape.
-  ctx.lineTo(200, 20);
+  ctx.lineTo(220, 0); // Draw lines to make the shape.
+  ctx.lineTo(190, 25);
   ctx.lineTo(151, 0);
   ctx.stroke(); // Complete the path by stroking (draw lines).
   ctx.fill(); // Then fill.
