@@ -428,7 +428,6 @@ const wheel = new Winwheel({
     spins: 12,
     easing: "Power4.easeInOut",
     callbackSound: playSound,
-    callbackAfter: drawTriangle(),
     callbackFinished: function (segment) {
       //抽到之後，把視窗關起來
       document.querySelector(".wheel").style.display = "none";
@@ -499,6 +498,7 @@ const wheel = new Winwheel({
         }
       );
     },
+    callbackAfter: drawTriangle(),
   },
 });
 
