@@ -421,7 +421,6 @@ const wheel = new Winwheel({
       textFontSize: "12",
     };
   }),
-  callbackAfter: drawColourTriangle(),
   responsive: true,
   pins: true,
   animation: {
@@ -429,6 +428,7 @@ const wheel = new Winwheel({
     spins: 12,
     easing: "Power4.easeInOut",
     callbackSound: playSound,
+    callbackAfter: drawColourTriangle(),
     callbackFinished: function (segment) {
       //抽到之後，把視窗關起來
       document.querySelector(".wheel").style.display = "none";
