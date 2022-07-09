@@ -517,11 +517,12 @@ function drawTriangle() {
 
   ctx.strokeStyle = "navy"; // Set line colour.
   ctx.fillStyle = "orange"; // Set fill colour.
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
   ctx.beginPath(); // Begin path.
-  ctx.moveTo(75, 50);
-  ctx.lineTo(100, 75);
-  ctx.lineTo(100, 25);
+  context.moveTo(100, 100);
+  context.lineTo(100, 300);
+  context.lineTo(300, 300);
+  context.closePath();
   // ctx.stroke(); // Complete the path by stroking (draw lines).
   ctx.fill(); // Then fill.
 }
