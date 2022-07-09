@@ -521,7 +521,7 @@ handImage.onload = function()
 };
  
 // Set source of the image. Once loaded the onload callback above will be triggered.
-handImage.src = 'pointing_hand.png';
+handImage.src = '/hand_point_left.png';
 
 
 let audio = new Audio('/tick.mp3');  // Create audio object and load desired file.
