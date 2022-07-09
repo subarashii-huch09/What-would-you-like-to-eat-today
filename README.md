@@ -12,14 +12,14 @@ There is a Google map that will display relevant information for the winning foo
 
 ## Built With
 - Bootstrap
-- Javascript
+- JavaScript
 - Google Maps Platform APIs 
 - Winwheel.js
 - GSAP TweenMax.js
 
 <!-- CONTRIBUTING -->
 ## Contributing
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "improvement". Any contributions you make are **greatly appreciated**.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AwesomeFeature`)
@@ -43,8 +43,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Chingwen Hu - cwhu823@icloud.com
-
-<!-- Project Link: [ https://subarashii-huch09.github.io/What-would-you-like-to-eat-today](https://subarashii-huch09.github.io/What-would-you-like-to-eat-today) -->
+<Br>
+Project Link: [ https://mealfortoday.netlify.app](https://mealfortoday.netlify.app)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -57,6 +57,7 @@ Chingwen Hu - cwhu823@icloud.com
 * [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
 * [Winwheel.js](http://dougtesting.net/winwheel/examples)
 * [Google Maps Platform APIs Documentation](https://developers.google.com/maps/documentation/javascript)
+* [Google Maps API 學習筆記](https://www.letswrite.tw/google-map-api-marker-custom/)
 * [GSAP TweenMax.js](https://greensock.com/docs/v3/GSAP/Tween)
 * Novia YY Chen - Translation (Mandarin & Japanese)
 
