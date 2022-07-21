@@ -65,7 +65,7 @@ let data = {
   english: {
     title: "What'd you like to eat today?",
     instruction: `
-        <p>Can’t decide what’s for lunch or dinner? You've come to the right place !</p>
+        <p>Can’t decide what or where to have for lunch or dinner? You've come to the right place !</p>
           <p>    
             For better user experience, allow the site to use your current
             location.
